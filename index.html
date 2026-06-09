@@ -12,14 +12,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
-      min-height: 100%;
+      min-height: 100vh;
       font-family: 'DM Sans', sans-serif;
       background: linear-gradient(145deg, #f0f4ff 0%, #fce8f6 40%, #e8f4ff 70%, #f5f0ff 100%);
       background-attachment: fixed;
       color: #1e1535;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* NAV */
     nav {
       display: flex;
       justify-content: space-between;
@@ -27,6 +28,7 @@
       padding: 22px 40px;
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
     }
 
     .nav-logo {
@@ -56,16 +58,14 @@
 
     .nav-links a:hover { color: #8b5cf6; }
 
-    /* HERO */
     .hero {
+      flex: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 52px 24px 64px;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 60px 24px 80px;
     }
 
     .hero-name {
@@ -98,136 +98,10 @@
       margin-top: 18px;
     }
 
-    /* STORE */
-    .store {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px 60px;
-    }
-
-    .store-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 0 16px;
-      border-top: 0.5px solid rgba(160, 130, 210, 0.22);
-      margin-bottom: 16px;
-    }
-
-    .store-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #9b7ec8;
-    }
-
-    .store-view-all {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(140, 100, 200, 0.4);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .store-view-all:hover { color: #8b5cf6; }
-
-    .gear-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .gear-card {
-      background: rgba(255, 255, 255, 0.62);
-      border: 0.5px solid rgba(180, 150, 230, 0.28);
-      border-radius: 14px;
-      padding: 14px 12px;
-      position: relative;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .gear-card:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.82);
-    }
-
-    .gear-img {
-      width: 100%;
-      height: 80px;
-      background: linear-gradient(135deg, rgba(200, 180, 245, 0.3), rgba(180, 215, 255, 0.3));
-      border-radius: 9px;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
-
-    .gear-name {
-      font-size: 12px;
-      font-weight: 500;
-      color: #2e1f50;
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-
-    .gear-prices {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .gear-sale {
-      font-size: 14px;
-      font-weight: 600;
-      color: #7c3aed;
-    }
-
-    .gear-orig {
-      font-size: 11px;
-      color: #b0a0c0;
-      text-decoration: line-through;
-    }
-
-    .gear-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: linear-gradient(135deg, #8b5cf6, #ec4899);
-      color: #fff;
-      font-size: 8px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 3px 8px;
-      border-radius: 100px;
-      text-transform: uppercase;
-    }
-
-    .gear-sold {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(160, 130, 180, 0.12);
-      border: 0.5px solid rgba(160, 130, 180, 0.28);
-      color: #a08ab8;
-      font-size: 8px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 3px 8px;
-      border-radius: 100px;
-      text-transform: uppercase;
-    }
-
-    /* FOOTER */
     footer {
       max-width: 1200px;
       margin: 0 auto;
+      width: 100%;
       padding: 20px 40px;
       border-top: 0.5px solid rgba(160, 130, 210, 0.15);
       display: flex;
@@ -259,14 +133,11 @@
 
     .footer-links a:hover { color: #8b5cf6; }
 
-    /* MOBILE */
     @media (max-width: 640px) {
       nav { padding: 18px 20px; }
       .nav-links { gap: 16px; }
       .nav-links a { font-size: 12px; }
-      .store { padding: 0 20px 40px; }
       footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
-      .gear-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
@@ -275,7 +146,7 @@
   <nav>
     <a href="/" class="nav-logo">Tech But Human</a>
     <ul class="nav-links">
-      <li><a href="#store">store</a></li>
+      <li><a href="/store">store</a></li>
       <li><a href="https://fitbuthuman.com">fit but human</a></li>
       <li><a href="#">jonathan & friends</a></li>
     </ul>
@@ -285,76 +156,6 @@
     <p class="hero-name">Jonathan Morrison</p>
     <h1 class="hero-brand">tech but human.</h1>
     <p class="hero-coming">coming soon...</p>
-  </section>
-
-  <section class="store" id="store">
-    <div class="store-header">
-      <span class="store-label">Fan Gear — Real Discounts</span>
-      <a href="#store" class="store-view-all">View all →</a>
-    </div>
-    <div class="gear-grid">
-
-      <a href="#" class="gear-card">
-        <span class="gear-badge">Sale</span>
-        <div class="gear-img">📷</div>
-        <p class="gear-name">Sony FE 90mm Macro</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$480</span>
-          <span class="gear-orig">$700</span>
-        </div>
-      </a>
-
-      <a href="#" class="gear-card">
-        <span class="gear-badge">Sale</span>
-        <div class="gear-img">🎧</div>
-        <p class="gear-name">AirPods Max USB-C</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$260</span>
-          <span class="gear-orig">$375</span>
-        </div>
-      </a>
-
-      <a href="#" class="gear-card">
-        <span class="gear-sold">Sold Out</span>
-        <div class="gear-img">💻</div>
-        <p class="gear-name">Lenovo LOQ RTX 5060</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$600</span>
-          <span class="gear-orig">$1,000</span>
-        </div>
-      </a>
-
-      <a href="#" class="gear-card">
-        <span class="gear-badge">Sale</span>
-        <div class="gear-img">📱</div>
-        <p class="gear-name">iPhone Air 256GB</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$700</span>
-          <span class="gear-orig">$899</span>
-        </div>
-      </a>
-
-      <a href="#" class="gear-card">
-        <span class="gear-sold">Sold Out</span>
-        <div class="gear-img">🎙️</div>
-        <p class="gear-name">Sennheiser MKE 600</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$160</span>
-          <span class="gear-orig">$250</span>
-        </div>
-      </a>
-
-      <a href="#" class="gear-card">
-        <span class="gear-badge">Sale</span>
-        <div class="gear-img">📟</div>
-        <p class="gear-name">Daylight DC-1 Tablet</p>
-        <div class="gear-prices">
-          <span class="gear-sale">$300</span>
-          <span class="gear-orig">$500</span>
-        </div>
-      </a>
-
-    </div>
   </section>
 
   <footer>
