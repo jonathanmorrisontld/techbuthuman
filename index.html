@@ -6,13 +6,13 @@
 <title>Make Better Videos — Tech But Human</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
     min-height: 100vh;
-    font-family: 'DM Sans', sans-serif;
-    background: linear-gradient(145deg, #f0f4ff 0%, #fce8f6 40%, #e8f4ff 70%, #f5f0ff 100%);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #ffffff;
     background-attachment: fixed;
     color: #1e1535;
   }
@@ -55,10 +55,11 @@
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.15;
-    background: linear-gradient(120deg, #8b5cf6, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: #1e1535;
+    background-clip: unset;
+    color: #1e1535;
     margin-bottom: 18px;
   }
   .hero-sub {
@@ -79,8 +80,21 @@
     letter-spacing: 0.02em;
   }
   .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .hero-video-wrap {
+    max-width: 640px;
+    margin: 32px auto 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(30,21,53,0.12);
+  }
+  .hero-video-wrap iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    border: none;
+  }
   .hero-note {
-    font-size: 15px;
+    font-size: 17px;
     color: #1e1535;
     line-height: 1.7;
     max-width: 640px;
@@ -107,16 +121,24 @@
   .topics-list {
     display: flex;
     justify-content: center;
-    gap: 28px;
+    gap: 12px;
     flex-wrap: wrap;
+    align-items: center;
   }
   .topic-bullet {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
-  .topic-icon { font-size: 20px; }
-  .topic-name { font-size: 14px; font-weight: 600; color: #2e1f50; }
+  .topic-bullet::after {
+    content: "·";
+    color: #c0b8d0;
+    font-size: 18px;
+  }
+  .topic-bullet:last-child::after {
+    content: "";
+  }
+  .topic-name { font-size: 14px; font-weight: 500; color: #1e1535; }
 
   /* schedule strip */
   .schedule-row {
@@ -149,21 +171,22 @@
   @media (max-width: 560px) { .tiers { grid-template-columns: 1fr; } }
 
   .tier-card {
-    background: rgba(255,255,255,0.65);
-    border: 0.5px solid rgba(180,150,230,0.28);
+    background: #fdfbf6;
+    border: 1px solid #ece4d6;
     border-radius: 20px;
     padding: 26px 22px;
     display: flex;
     flex-direction: column;
     position: relative;
+    box-shadow: 0 2px 12px rgba(30,21,53,0.06);
   }
   .tier-card.vip {
-    background: linear-gradient(160deg, rgba(139,92,246,0.10), rgba(236,72,153,0.10)), rgba(255,255,255,0.65);
-    border: 1px solid rgba(139,92,246,0.35);
+    background: #fdfbf6;
+    border: 1.5px solid #0076b6;
   }
   .tier-card.founder {
-    background: linear-gradient(160deg, rgba(184,135,58,0.12), rgba(214,168,74,0.10)), rgba(255,255,255,0.65);
-    border: 1px solid rgba(184,135,58,0.35);
+    background: #fdfbf6;
+    border: 1.5px solid #b8873a;
   }
   .tier-top {
     min-height: 52px;
@@ -173,7 +196,7 @@
   }
   .early-bird-tag {
     display: inline-block;
-    background: linear-gradient(120deg, #8b5cf6, #ec4899);
+    background: #0076b6;
     color: #fff;
     font-size: 10px;
     font-weight: 600;
@@ -186,7 +209,7 @@
   .tier-badge {
     position: absolute;
     top: -12px; right: 24px;
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    background: #0076b6;
     color: #fff;
     font-size: 10px; font-weight: 600;
     letter-spacing: 0.05em;
@@ -195,14 +218,14 @@
     text-transform: uppercase;
   }
   .tier-badge.gold {
-    background: linear-gradient(135deg, #d6a84a, #b8873a);
+    background: #b8873a;
   }
   .tier-name { font-size: 12.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8b5cf6; margin-bottom: 4px; }
   .tier-name.gold-text { color: #b8873a; }
   .tier-title { font-size: 17px; font-weight: 700; color: #1e1535; margin-bottom: 4px; }
   .tier-runtime { font-size: 11.5px; color: #9080b0; font-family: 'DM Mono', monospace; margin-bottom: 14px; }
   .tier-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
-  .tier-price { font-size: 32px; font-weight: 700; color: #1e1535; }
+  .tier-price { font-size: 32px; font-weight: 800; color: #1e1535; }
   .tier-price-strike { font-size: 14px; color: #b8a8d0; text-decoration: line-through; font-family: 'DM Mono', monospace; }
   .tier-desc { font-size: 12.5px; color: #6a5a8a; margin-bottom: 18px; line-height: 1.45; }
   .tier-features { list-style: none; margin-bottom: 22px; flex-grow: 1; }
@@ -216,16 +239,16 @@
     gap: 8px;
   }
   .tier-features li:first-child { border-top: none; }
-  .tier-features li::before { content: "✓"; color: #8b5cf6; font-weight: 700; flex-shrink: 0; }
+  .tier-features li::before { content: "✓"; color: #1e1535; font-weight: 700; flex-shrink: 0; }
   .tier-card.founder .tier-features li::before { color: #b8873a; }
   .tier-btn {
-    background: linear-gradient(120deg, #8b5cf6, #ec4899);
+    background: #0076b6;
     color: #fff;
     border: none;
     border-radius: 12px;
     padding: 14px 18px;
     width: 100%;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -234,9 +257,9 @@
     text-decoration: none;
     display: block;
   }
-  .tier-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(139,92,246,0.3); }
+  .tier-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0,118,182,0.3); }
   .tier-btn.gold {
-    background: linear-gradient(120deg, #d6a84a, #b8873a);
+    background: #b8873a;
   }
   .tier-btn.gold:hover { box-shadow: 0 8px 20px rgba(184,135,58,0.3); }
   .tier-note { font-size: 10.5px; color: #a898c8; text-align: center; margin-top: 10px; }
@@ -244,7 +267,7 @@
   /* recording pre-order banner */
   .recording-banner {
     margin-top: 20px;
-    background: linear-gradient(120deg, #241a3d, #3b2159);
+    background: #0076b6;
     border-radius: 22px;
     padding: 40px;
     display: flex;
@@ -260,20 +283,20 @@
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #c9b6ff;
+    color: #b8dcf0;
     margin-bottom: 10px;
   }
   .recording-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-  .recording-desc { font-size: 13.5px; color: #cfc7e6; line-height: 1.55; }
+  .recording-desc { font-size: 13.5px; color: #d6ecf7; line-height: 1.55; }
   .rec-price { font-size: 48px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .rec-price-after { font-size: 12px; color: #a99fc4; margin-bottom: 16px; font-family: 'DM Mono', monospace; }
+  .rec-price-after { font-size: 12px; color: #a8d2e8; margin-bottom: 16px; font-family: 'DM Mono', monospace; }
   .rec-btn {
     background: #fff;
-    color: #241a3d;
+    color: #0076b6;
     border: none;
     border-radius: 12px;
     padding: 13px 40px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -326,9 +349,12 @@
   <div class="hero-eyebrow">In-person video workshop — hosted by Jonathan Morrison</div>
   <h1 class="hero-title">Make better videos (together).</h1>
   <div class="hero-meta">
-    <span>📍 Los Angeles, CA</span>
+    <span>📍 Santa Monica, CA</span>
     <span>🗓️ Saturday, August 29 · 2pm (general admission)</span>
 
+  </div>
+  <div class="hero-video-wrap">
+    <iframe src="https://player.vimeo.com/video/1219973821?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="video workshop almost"></iframe>
   </div>
   <p class="hero-note">My name is Jonathan and I love making videos. The best thing about creating is when the thing you make <em>inspires someone else to make something</em>.</p>
   <p class="hero-note">I've wanted to do something like this for a long time and honestly this is a little scary to launch but I think it's time. I'm not trying to sell you on a bullshit course, to "comment level up" or pass you along to some random person. I want to be there side by side and show you everything I've learned through the years and thousands of hours spent creating from lighting, shot composition, my creative process and more.</p>
@@ -337,11 +363,10 @@
 <section class="section">
   <div class="section-title">What I'll cover</div>
   <div class="topics-list">
-    <div class="topic-bullet"><span class="topic-icon">💡</span><span class="topic-name">Lighting</span></div>
-    <div class="topic-bullet"><span class="topic-icon">🎤</span><span class="topic-name">Audio</span></div>
-    <div class="topic-bullet"><span class="topic-icon">📱</span><span class="topic-name">iPhone filmmaking</span></div>
-    <div class="topic-bullet"><span class="topic-icon">🎥</span><span class="topic-name">Sony FX5 in action</span></div>
-    <div class="topic-bullet"><span class="topic-icon">▶️</span><span class="topic-name">My YouTube approach</span></div>
+    <div class="topic-bullet"><span class="topic-name">Lighting</span></div>
+    <div class="topic-bullet"><span class="topic-name">Audio</span></div>
+    <div class="topic-bullet"><span class="topic-name">iPhone filmmaking</span></div>
+    <div class="topic-bullet"><span class="topic-name">My YouTube approach</span></div>
   </div>
 </section>
 
@@ -388,7 +413,7 @@
         <li>Everything in General Admission</li>
       </ul>
       <div class="tier-bottom">
-        <a class="tier-btn" href="https://buy.stripe.com/28EbJ0bFTcvx7kd364f7i0h" target="_blank">Get VIP Access</a>
+        <a class="tier-btn" href="https://buy.stripe.com/28EbJ0bFTcvx7kd364f7i0h" target="_blank">Get VIP Tickets</a>
         <div class="tier-note">Secure checkout via Stripe</div>
       </div>
     </div>
@@ -463,6 +488,7 @@
   <span class="footer-copy">© 2026 Jonathan Morrison — Tech But Human</span>
 </footer>
 
-<script defer src="/_vercel/insights/script.js"></script>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
